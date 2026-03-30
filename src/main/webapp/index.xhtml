@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+    <title>TMart</title>
+    <h:outputStylesheet library="css" name="navbar.css" />
+</h:head>
+
+<h:body>
+    <ui:include src="/navbar.xhtml" />
+    <p>Bean test: #{skuBean}</p>
+    <p>List test: #{skuBean.skuList.size()}</p>
+    <h:form>
+        <h:dataTable value="#{skuBean.skuList}" var="sku">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{sku.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{sku.title}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                #{sku.price}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+
+</html>

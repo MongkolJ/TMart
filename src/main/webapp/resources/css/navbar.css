@@ -1,0 +1,43 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #7c3aed;
+    padding: 16px;
+}
+
+.cart-container {
+    position: relative;
+    text-decoration: none;
+    color: #111827;
+    padding: 16px;
+}
+
+.btn-login {
+    text-decoration: none;
+    color: #111827;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    display: inline-block;
+    border-radius: 6px;
+}
+
+.btn-register {
+    text-decoration: none;
+    background: #111827;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+}

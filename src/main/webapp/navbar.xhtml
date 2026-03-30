@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <nav class="navbar">
+        <div class="logo-text">TMART</div>
+        <div>
+            <h:link outcome="/cart" styleClass="cart-container">
+                <i class="pi pi-shopping-cart cart-icon"></i>
+            </h:link>
+            <h:link value="Login" outcome="/login" styleClass="btn-login"/>
+            <h:link value="Register" outcome="/login" styleClass="btn-register"/>
+        </div>
+    </nav>
+
+</ui:composition>

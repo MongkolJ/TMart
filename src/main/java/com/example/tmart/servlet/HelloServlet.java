@@ -1,4 +1,4 @@
-package com.example.tmart;
+package com.example.tmart.servlet;
 
 import java.io.*;
 
