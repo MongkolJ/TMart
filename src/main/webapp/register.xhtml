@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+    <title>TMart - Register</title>
+    <h:outputStylesheet library="css" name="login.css"/>
+</h:head>
+
+<h:body>
+    <div class="login-page">
+        <div class="login-card">
+            <h1>Create an account</h1>
+            <p class="login-subtitle">Enter your information to get started</p>
+
+            <h:form>
+                <div class="login-field">
+                    <label for="name">Full Name</label>
+                    <p:inputText id="name"
+                                 value="#{userBean.name}"
+                                 placeholder="John Doe"
+                                 styleClass="login-input"/>
+                </div>
+
+                <div class="login-field">
+                    <label for="username">Username</label>
+                    <p:inputText id="username"
+                                 value="#{userBean.username}"
+                                 placeholder="johndoe"
+                                 styleClass="login-input"/>
+                </div>
+
+                <div class="login-field">
+                    <label for="password">Password</label>
+                    <p:password id="password"
+                                value="#{userBean.password}"
+                                feedback="false"
+                                styleClass="login-input"/>
+                </div>
+
+                <div class="login-field">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <p:password id="confirmPassword"
+                                value="#{userBean.confirmPassword}"
+                                feedback="false"
+                                styleClass="login-input"/>
+                </div>
+
+                <p:commandButton value="Register"
+                                 action="#{userBean.register()}"
+                                 styleClass="login-btn"
+                                 ajax="false"/>
+
+                <div class="login-register">
+                    Already have an account? <h:link value="Login here" outcome="/login"/>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

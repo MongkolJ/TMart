@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+    <title>TMart - Cart</title>
+    <h:outputStylesheet library="css" name="navbar.css"/>
+    <h:outputStylesheet library="css" name="cart.css"/>
+</h:head>
+
+<h:body>
+    <ui:include src="/navbar.xhtml"/>
+
+    <div class="cart-page">
+        <div class="cart-left">
+            <div class="cart-header">
+                <h1>Shopping Cart</h1>
+                <h:form>
+                    <p:commandButton value="Clear Cart"
+                                     styleClass="btn-clear-cart"
+                                     action="#{cartBean.clearCart()}"
+                                     ajax="false"/>
+                </h:form>
+            </div>
+
+            <h:form>
+                <ui:repeat var="item" value="#{cartBean.itemCartList}">
+                    <div class="cart-item">
+                        <img src="#{skuBean.getSKUById(item.skuId).imageAsBase64}" alt="#{skuBean.getSKUById(item.skuId).title}"/>
+                        <div class="cart-item-info">
+                            <h2>#{skuBean.getSKUById(item.skuId).title}</h2>
+                            <span class="cart-item-price">
+                                ฿<h:outputText value="#{item.totalPrice}">
+                                    <f:convertNumber groupingUsed="true"
+                                                     minFractionDigits="0"
+                                                     maxFractionDigits="0"/>
+                                </h:outputText>
+                            </span>
+                        </div>
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="btn-remove-item"
+                                         action="#{cartBean.removeItem(item)}"
+                                         update="@form :cartCount"/>
+                    </div>
+                </ui:repeat>
+            </h:form>
+        </div>
+
+        <div class="cart-right">
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>฿<h:outputText value="#{cartBean.cart.totalPrice}">
+                        <f:convertNumber groupingUsed="true"
+                                         minFractionDigits="2"
+                                         maxFractionDigits="2"/>
+                    </h:outputText></span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="free">Free</span>
+                </div>
+                <div class="summary-divider"/>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span class="total-price">฿<h:outputText value="#{cartBean.cart.totalPrice}">
+                        <f:convertNumber groupingUsed="true"
+                                         minFractionDigits="2"
+                                         maxFractionDigits="2"/>
+                    </h:outputText></span>
+                </div>
+                <h:form>
+                    <p:commandButton value="Proceed to Checkout"
+                                     styleClass="btn-checkout"
+                                     action="#{cartBean.checkout()}"
+                                     ajax="false"/>
+                    <p:button value="Continue Shopping"
+                              outcome="/index"
+                              styleClass="btn-continue"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

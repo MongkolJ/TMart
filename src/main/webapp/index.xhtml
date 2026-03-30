@@ -7,28 +7,35 @@
 
 <h:head>
     <title>TMart</title>
-    <h:outputStylesheet library="css" name="navbar.css" />
+    <h:outputStylesheet library="css" name="navbar.css"/>
+    <h:outputStylesheet library="css" name="index.css"/>
 </h:head>
 
 <h:body>
-    <ui:include src="/navbar.xhtml" />
-    <p>Bean test: #{skuBean}</p>
-    <p>List test: #{skuBean.skuList.size()}</p>
+    <ui:include src="/navbar.xhtml"/>
+
     <h:form>
-        <h:dataTable value="#{skuBean.skuList}" var="sku">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                #{sku.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{sku.title}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Price</f:facet>
-                #{sku.price}
-            </h:column>
-        </h:dataTable>
+        <p:dataGrid var="sku" value="#{skuBean.skuList}" columns="3">
+            <p:column>
+                <div class="sku-card">
+                    <img src="#{sku.imageAsBase64}" alt="#{sku.title}"/>
+                    <div class="sku-content-container">
+                        <h2>#{sku.title}</h2>
+                        <p>#{sku.description}</p>
+                        <div>
+                            <h:outputText value="#{sku.price}" style="font-size: 2rem; font-weight: bold; color: #7c3aed">
+                                <f:convertNumber type="currency" currencySymbol="฿"
+                                                 groupingUsed="true" minFractionDigits="2"
+                                                 maxFractionDigits="2"/>
+                            </h:outputText>
+                        </div>
+                        <p:commandButton value="Add to Cart" icon="pi pi-shopping-cart"
+                                         styleClass="btn-add-to-cart"
+                                         action="#{cartBean.addItem(sku)}"/>
+                    </div>
+                </div>
+            </p:column>
+        </p:dataGrid>
     </h:form>
 </h:body>
 

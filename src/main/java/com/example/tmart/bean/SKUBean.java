@@ -7,6 +7,7 @@ import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 
 
+import java.util.Base64;
 import java.util.List;
 
 @Named("skuBean")
@@ -24,7 +25,7 @@ public class SKUBean {
             }
 
             return em.createQuery(
-                            "SELECT s FROM SKU s WHERE s.categoryId = :categoryId", SKU.class)
+                            "SELECT s FROM SKU s WHERE s.categoryId =: categoryId", SKU.class)
                     .setParameter("categoryId", categoryId)
                     .getResultList();
         }
@@ -41,5 +42,12 @@ public class SKUBean {
             }
         }
         return skuList;
+    }
+
+
+    public SKU getSKUById(String id) {
+        try (EntityManager em = EMUtil.getEMF().createEntityManager()) {
+            return em.find(SKU.class, id);   // faster than JPQL for PK lookup
+        }
     }
 }

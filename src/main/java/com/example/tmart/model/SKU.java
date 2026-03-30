@@ -1,5 +1,8 @@
 package com.example.tmart.model;
+
 import jakarta.persistence.*;
+
+import java.util.Base64;
 
 @Entity
 @Table(name = "sku")
@@ -20,7 +23,7 @@ public class SKU {
     private String categoryId;
 
     @Lob
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
     public String getId() {
@@ -69,5 +72,11 @@ public class SKU {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getImageAsBase64() {
+        if (image == null) return "";
+        String encoded = Base64.getEncoder().encodeToString(image);
+        return "data:image/jpeg;base64," + encoded;
     }
 }

@@ -8,11 +8,29 @@
     <nav class="navbar">
         <div class="logo-text">TMART</div>
         <div>
-            <h:link outcome="/cart" styleClass="cart-container">
+            <h:link outcome="/cart"
+                    styleClass="cart-container"
+                    rendered="#{userBean.loggedIn}">
                 <i class="pi pi-shopping-cart cart-icon"></i>
+                <h:outputText id="cartCount"
+                              value="#{cartBean.cartCount}"
+                              rendered="#{cartBean.cartCount > 0}"
+                              styleClass="cart-badge"/>
             </h:link>
-            <h:link value="Login" outcome="/login" styleClass="btn-login"/>
-            <h:link value="Register" outcome="/login" styleClass="btn-register"/>
+
+            <h:link value="Login"
+                    outcome="/login"
+                    styleClass="btn-login"
+                    rendered="#{!userBean.loggedIn}"/>
+
+            <h:link value="Register"
+                    outcome="/register"
+                    styleClass="btn-register"
+                    rendered="#{!userBean.loggedIn}"/>
+
+            <h:outputText value="#{userBean.user.name}"
+                          styleClass="navbar-username"
+                          rendered="#{userBean.loggedIn}"/>
         </div>
     </nav>
 
